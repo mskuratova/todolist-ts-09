@@ -5,35 +5,31 @@ type AddItemFormType = {
 }
 
 export function AddItemForm(props: AddItemFormType) {
-    const [newTaskTitle, setNewTaskTitle] = useState("")
+    const [title, setTitle] = useState("")
     const [error, setError] = useState<string | null>(null)
-    const onNewTitleChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setNewTaskTitle(e.currentTarget.value)
-        // setNewTaskTitle("")
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setTitle(e.currentTarget.value)
+         setTitle("")
     }
-    const addTask = () => {
-        if (newTaskTitle.trim() !== "") {
-            props.addItem(newTaskTitle.trim() )
-            // setNewTaskTitle("")
+    const addTItem = () => {
+        if (title.trim() !== "") {
+            props.addItem(title.trim() )
+            setTitle("")
         }
         else
         setError("Field is required")
     }
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        setError("")
+        setError(null)
     }
 
     return <div>
-        <input value={newTaskTitle}
-               onChange={onNewTitleChangeHandler}
+        <input value={title}
+               onChange={onChangeHandler}
                className={error ? "error" : ""}
                onKeyPress={onKeyPressHandler}
-            // {(e) => {
-            // if (e.charCode ===13) {props.addTask(newTaskTitle)
-            //     setNewTaskTitle("")}
-            // }}
         />
-        <button onClick={addTask}>+</button>
+        <button onClick={addTItem}>+</button>
         {error && <div className="error-message">{error}</div>}
     </div>
 }
