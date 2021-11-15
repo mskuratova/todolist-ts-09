@@ -98,7 +98,7 @@ export const setTodosAC = (todos: Array<TodolistType>) => {
 }
 export type  SetTodosActionType = ReturnType<typeof setTodosAC>
 
-export const setTodosThunk = (dispatch:Dispatch, getState: () => AppRootStateType): void => {
+export const setTodosTC = () => (dispatch:Dispatch, getState: () => AppRootStateType): void => {
     todolistsAPI.getTodolists()
         .then((res) => {
             let todos = res.data
