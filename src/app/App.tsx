@@ -1,5 +1,16 @@
 import React, {useCallback, useEffect} from 'react'
 import './App.css'
+import {
+    AppBar,
+    Button,
+    CircularProgress,
+    Container,
+    IconButton,
+    LinearProgress,
+    Toolbar,
+    Typography
+} from '@material-ui/core'
+import {Menu} from '@material-ui/icons'
 import {TodolistsList} from '../features/TodolistsList/TodolistsList'
 import {ErrorSnackbar} from '../components/ErrorSnackbar/ErrorSnackbar'
 import {useDispatch, useSelector} from 'react-redux'
@@ -8,8 +19,6 @@ import {initializeAppTC, RequestStatusType} from './app-reducer'
 import {BrowserRouter, Route} from 'react-router-dom'
 import {Login} from '../features/Login/Login'
 import {logoutTC} from '../features/Login/auth-reducer'
-import {AppBar, Button, CircularProgress, Container, IconButton, LinearProgress, Toolbar, Typography} from "@mui/material";
-import {Menu} from "@mui/icons-material";
 
 type PropsType = {
     demo?: boolean
@@ -36,8 +45,6 @@ function App({demo = false}: PropsType) {
         </div>
     }
 
-    // @ts-ignore
-    // @ts-ignore
     return (
         <BrowserRouter>
             <div className="App">
@@ -55,12 +62,8 @@ function App({demo = false}: PropsType) {
                     {status === 'loading' && <LinearProgress/>}
                 </AppBar>
                 <Container fixed>
-                    <Route
-                        // @ts-ignore
-                        exact path={'/'} render={() => <TodolistsList demo={demo}/>}/>
-                    <Route path={'/login'}
-                        // @ts-ignore
-                           render={() => <Login/>}/>
+                    <Route exact path={'/'} render={() => <TodolistsList demo={demo}/>}/>
+                    <Route path={'/login'} render={() => <Login/>}/>
                 </Container>
             </div>
         </BrowserRouter>

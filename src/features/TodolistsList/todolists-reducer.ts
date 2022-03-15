@@ -75,7 +75,6 @@ export const addTodolistTC = (title: string) => {
         dispatch(setAppStatusAC('loading'))
         todolistsAPI.createTodolist(title)
             .then((res) => {
-                // @ts-ignore
                 dispatch(addTodolistAC(res.data.data.item))
                 dispatch(setAppStatusAC('succeeded'))
             })
