@@ -1,6 +1,6 @@
 import {appReducer, InitialStateType, setAppErrorAC, setAppStatusAC} from './app-reducer'
 
-let startState: { error: null; status: string };
+let startState: InitialStateType;
 
 beforeEach(() => {
     startState = {
