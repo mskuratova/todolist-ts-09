@@ -45,15 +45,14 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
         if (demo || !isLoggedIn) {
             return
         }
-        if (!todolists.length) {
-            fetchTodolistsTC()
-        }
+        fetchTodolistsTC()
     }, [])
 
 
     if (!isLoggedIn) {
         return <Redirect to={'/login'}/>
     }
+
     return <>
         <Grid container style={{padding: '20px'}}>
             <AddItemForm addItem={addTodolistCallback}/>

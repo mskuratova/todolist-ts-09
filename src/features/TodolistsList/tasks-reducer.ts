@@ -5,21 +5,8 @@ import {handleAsyncServerAppError, handleAsyncServerNetworkError} from '../../ut
 import {asyncActions as asyncTodolistsActions} from './todolists-reducer'
 import {AppRootStateType, ThunkError} from '../../utils/types'
 import {TaskPriorities, TaskStatuses, TaskType, UpdateTaskModelType} from '../../api/types'
-import {put, call} from 'redux-saga/effects'
-import {tasksActions} from "./index";
 
 const initialState: TasksStateType = {}
-
-//sagas
-export function* fetchTasksWorkerSaga (action: any) {
-    yield put(appActions.setAppStatus({status: 'loading'}))
-    const res = yield call(todolistsAPI.getTasks, action.todolistId)
-    const tasks = res.data.items
-    yield put(appActions.setAppStatus({status: 'succeeded'}))
-    // @ts-ignore
-    yield put(tasksActions.addTask(tasks, action.todolistId))
-}
-export const fetchTasksTC =(todolistId: string) => ({type: "TASKS/FETCH-TASKS", todolistId})
 
 export const fetchTasks = createAsyncThunk<{ tasks: TaskType[], todolistId: string }, string, ThunkError>('tasks/fetchTasks', async (todolistId, thunkAPI) => {
     thunkAPI.dispatch(appActions.setAppStatus({status: 'loading'}))
@@ -32,13 +19,11 @@ export const fetchTasks = createAsyncThunk<{ tasks: TaskType[], todolistId: stri
         return handleAsyncServerNetworkError(error, thunkAPI)
     }
 })
-
 export const removeTask = createAsyncThunk<{ taskId: string, todolistId: string }, { taskId: string, todolistId: string }, ThunkError>('tasks/removeTask',
     async (param, thunkAPI) => {
         const res = await todolistsAPI.deleteTask(param.todolistId, param.taskId)
         return {taskId: param.taskId, todolistId: param.todolistId}
     })
-
 export const addTask = createAsyncThunk<TaskType, { title: string, todolistId: string }, ThunkError>('tasks/addTask',
     async (param, thunkAPI) => {
         thunkAPI.dispatch(appActions.setAppStatus({status: 'loading'}))
@@ -132,7 +117,6 @@ export const slice = createSlice({
             })
     }
 })
-
 
 // types
 export type UpdateDomainTaskModelType = {
