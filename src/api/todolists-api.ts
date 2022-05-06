@@ -1,10 +1,11 @@
 import axios from 'axios'
+// @ts-ignore
 import {GetTasksResponse, LoginParamsType, ResponseType, TaskType, TodolistType, UpdateTaskModelType} from './types'
 
 const settings = {
     withCredentials: true,
     headers: {
-        'API-KEY': '095893d6-8dc6-4e4e-ab87-705fe5494f77'
+        'API-KEY': '1cdd9f77-c60e-4af5-b194-659e4ebd5d41'
     }
 }
 const instance = axios.create({
